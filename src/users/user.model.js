@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
  
 
-const UserSchemas = mongoose.Schema({
+const UserSchema = mongoose.Schema({
     nombre: {
         type : String,
         required : [true, "El nombre es requerido"],
     },
-    coreo: {
+    correo: {
         type : String,
         required : [true, "El correo es requerido"],
         unique: true,
@@ -14,7 +14,7 @@ const UserSchemas = mongoose.Schema({
 
     password: {
         type: String,
-        required:[true, "La contraseña es requerida"]
+        required:[true, "La contraseña es requerida"],
     },
     img:{
         type: String,
@@ -43,11 +43,11 @@ const UserSchemas = mongoose.Schema({
 
 });
 
-UserSchemas.methods.toJSON = function(){
-    const {___v, password, _id ,...usuario} = this.toObject();
+UserSchema.methods.toJSON = function(){
+    const { __v, password, _id , ...usuario} = this.toObject();
     usuario.uid =_id;
-    return user;
+    return usuario;
 
 }
 
-export default mongoose.model('User',UserSchemas)
+export default mongoose.model('User',UserSchema);

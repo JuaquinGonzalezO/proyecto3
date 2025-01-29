@@ -1,9 +1,8 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { login, register } from "./auth.controller";
-import { validarCampos } from "../middlewares/validar-campos";
-import { ExpressValidator } from "express-validator";
-import { esRoleValido, existenteEmail } from "../helpers/db-validator";
+import { login, register } from "./auth.controller.js";
+import { validarCampos } from "../middlewares/validar-campos.js";
+import { existenteEmail, esRoleValido } from "../helpers/db-validator.js";
 
 const router = Router();
 
@@ -18,9 +17,9 @@ router.post(
 );
 
 router.post(
-    '/registrer',
+    '/register',
    
-   [ check('nombre','El nombre es obligatorio'),
+   [ check('nombre','El nombre es obligatorio').not().isEmpty(),
     check('password','El password debe ser mayor a 6 digitos').isLength({min:6}),
     check('correo',' Este no es un correo valido').isEmail(),
    check('correo').custom(existenteEmail),
@@ -31,3 +30,4 @@ router.post(
 ],
 register
 )
+export  default router

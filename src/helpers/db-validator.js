@@ -1,5 +1,5 @@
-import Role from '../role/role.model';
-import User from '../users/user.model';
+import Role from '../role/role.model.js';
+import User from '../users/user.model.js';
 
 export const esRoleValido =async(role = '')=>{
     const existeRol = await Role.findOne({role});
@@ -14,7 +14,7 @@ export const esRoleValido =async(role = '')=>{
 }
 
 export const existenteEmail = async(correo = '')=>{
-    const existenteEmail = await User.findOne({corre});
+    const existenteEmail = await User.findOne({correo});
 
 
     if(existenteEmail){

@@ -1,9 +1,10 @@
 import bcryptjs from 'bcryptjs';
-import Usuario from '../helpers/generate-jwt'
-import { gernerarJWT } from '../helpers/generate-jwt';
+import Usuario from '../users/user.model.js'
+import { gernerarJWT } from '../helpers/generate-jwt.js';
 
-export const login = async (req, res, )=>{
- const {correo, password}=req.body;
+export const login = async (req, res )=>{
+ 
+    const {correo, password}=req.body;
 
  try {
     const usuario = await Usuario.findOne({correo});
@@ -13,14 +14,14 @@ export const login = async (req, res, )=>{
             msg: 'Credenciales incorrectas, Correo no exist en la base de datos'
         })
     }
-    if(!usuario.estado){
+    if(!usuario.status){
         return res.status(400).json({
             msg: 'El usuario no existe en la base de datos'
         })
     }
 
     const validPassword = bcryptjs.compareSync(password, usuario.password)
-    if(!usuario){
+    if(!validPassword){
         return res.status(400).json({
             msg: 'La contraseña es incorrecta'
         })
