@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export const gernerarJWT = (uid = '')=>{
+export const generarJWT = (uid = '')=>{
      return new Promise((resolve, reject)=>{
 
         const payload = {uid};
@@ -9,7 +9,7 @@ export const gernerarJWT = (uid = '')=>{
             payload,
             process.env.SECRETORPRIVATEKEY,
             {
-                expiresIn : '1h'
+                expiresIn: '1h'
             },
             (err, token)=>{
             
