@@ -8,6 +8,8 @@ import { dbConnection } from './mongo.js';
 import limiter from '../src/middlewares/validar-cant-peticiones.js';
 import authRoutes from '../src/auth/auth.routes.js'
 import userRoustes from '../src/users/user.routes.js'
+import petRoutes from '../src/pet/pet-routes.js'
+
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));
     app.use(cors());
@@ -20,6 +22,8 @@ const middlewares = (app) => {
 const routes = (app) => {
     app.use("/adoptionSystem/v1/auth", authRoutes);
     app.use("/adoptionSystem/v1/users", userRoustes)
+    app.use("/adoptionSystem/v1/users", petRoutes)
+
 }
 
 const conectarDB = async () => {
