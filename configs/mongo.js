@@ -1,14 +1,14 @@
 'use strict';
- 
+
 import mongoose from "mongoose";
- 
+
 export const dbConnection = async () => {
     try{
         mongoose.connection.on('error', ()=>{
             console.log('MongoDB | Could not be connected to MongoDB');
             mongoose.disconnect();
         });
-        mongoose.connection.on('connection', ()=>{
+        mongoose.connection.on('connecting', ()=>{
             console.log('MongoDB | Try connecting');
         });
         mongoose.connection.on('connected', ()=>{
