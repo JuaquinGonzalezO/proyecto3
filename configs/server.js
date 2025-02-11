@@ -22,7 +22,7 @@ const middlewares = (app) => {
 const routes = (app) => {
     app.use("/adoptionSystem/v1/auth", authRoutes);
     app.use("/adoptionSystem/v1/users", userRoustes)
-    app.use("/adoptionSystem/v1/users", petRoutes)
+    app.use("/adoptionSystem/v1/pets", petRoutes)
 
 }
 

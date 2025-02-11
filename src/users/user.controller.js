@@ -64,11 +64,11 @@ export const getUserById = async(req, res) => {
         const{ _id,password, email, ...data}=  req.body;
 
         if(password){
-            data.password = await hash(password)
+            data.password = await (password)
 
         }
 
-        const user = await User.findByIdAndUpdate(id. data,{new: true});
+        const user = await User.findByIdAndUpdate(id, data,{new: true});
          res.status(200).json({
             succes: true,
             msg:'Usuario Actualizado',
@@ -78,12 +78,17 @@ export const getUserById = async(req, res) => {
 
     } catch (error) {
         res.status(500).json({
-            succes:false,
+             succes:false,
             msg:'Error al actualizar Usuario',
             error
         })
     }
   }
+
+export const updatePassword = async(req, res)=>{
+    
+}
+
 
 export const deleteUser = async (req, res)=>{
     try {
