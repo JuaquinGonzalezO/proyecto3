@@ -1,34 +1,38 @@
-import {Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const Add_appointmentSchema = Schema({
-    name:{
-        type:String,
-        required: true
+const Add_appointmentSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-
-    symptom:{
-        type: String
+    symptom: {
+      type: String,
     },
-
-     description:{
-        type: String,
-        required: true
-
-     },
-     keeper:{
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-        require : true
-
+    description: {
+      type: String,
+      required: true,
     },
-    status:{
-        type : Boolean,
-        default: true
+    keeper: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,  
     },
-     
-    TimeStamps: true,
-    versionKey: false
+    status: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  {
+    timestamps: true,  
+    versionKey: false,
+  }
+);
 
-});
+Add_appointmentSchema.methods.toJSON = function () {
+  const { __v, password, _id, ...usuario } = this.toObject();
+  usuario.uid = _id;
+  return usuario;
+};
 
-export default model ('Add_appointment', Add_appointmentSchema)
+export default model("Add_appointment", Add_appointmentSchema);

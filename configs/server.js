@@ -9,6 +9,7 @@ import limiter from '../src/middlewares/validar-cant-peticiones.js';
 import authRoutes from '../src/auth/auth.routes.js'
 import userRoustes from '../src/users/user.routes.js'
 import petRoutes from '../src/pet/pet-routes.js'
+import add_appointmentRoutes from '../src/appointment/add_appointment.js'
 
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));
@@ -21,8 +22,10 @@ const middlewares = (app) => {
 
 const routes = (app) => {
     app.use("/adoptionSystem/v1/auth", authRoutes);
-    app.use("/adoptionSystem/v1/users", userRoustes)
-    app.use("/adoptionSystem/v1/pets", petRoutes)
+    app.use("/adoptionSystem/v1/users", userRoustes);
+    app.use("/adoptionSystem/v1/pets", petRoutes);
+    app.use("/adoptionSystem/v1/add_appointments", add_appointmentRoutes)
+
 
 }
 
