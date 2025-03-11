@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "b3ee4610-6d5a-4b2a-8229-8f4124af920a",
+		"name": "pets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42411346"
+	},
+	"item": [
+		{
+			"name": "REGISTER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"juan\",\r\n  \"surname\": \"mendez\",\r\n  \"username\": \"jmendez\",\r\n  \"email\": \"jmendez@gmail.com\",\r\n  \"password\": \"12345678\",\r\n  \"profilePicture\": \"\",\r\n  \"phone\": \"12345678\",\r\n  \"role\": \"ADMIN_ROLE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/adoptionSystem/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"adoptionSystem",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"email\": \"molayo@gmail.com\",\r\n   \"password\": \"12365487\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/adoptionSystem/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"adoptionSystem",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"maria\",\r\n  \"surname\": \"olayo\",\r\n  \"username\": \"molayo\",\r\n  \"email\": \"molayo@gmail.com\",\r\n  \"password\": \"12365487\",\r\n  \"profilePicture\": \"\",\r\n  \"phone\": \"12345678\",\r\n  \"role\": \"USER_ROLE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/adoptionSystem/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"adoptionSystem",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register-pet",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NmNmJiOWUwZjMyOTRiMTVlZjgyZTEiLCJpYXQiOjE3NDE2NDY4MDMsImV4cCI6MTc0MTY1MDQwM30.LLOcdRoVGh73qG6fYnbKWxYVd-WQu9ccNgrjHiD6Wm4",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"peny\",\r\n    \"description\":\"Mascota de 5 años\",\r\n    \"age\":5,\r\n    \"type\":\"gato\",\r\n    \"email\":\"molayo@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/adoptionSystem/v1/pet/addPet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"adoptionSystem",
+						"v1",
+						"pet",
+						"addPet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put-pet",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Max\",\r\n    \"description\": \"Mascota de 6 años\",\r\n    \"age\": 6,\r\n    \"type\": \"Perro\",\r\n     \"email\":\"molayo@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/adoptionSystem/v1/pet//updatePet/67cf7c15d47edad149a6009f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"adoptionSystem",
+						"v1",
+						"pet",
+						"",
+						"updatePet",
+						"67cf7c15d47edad149a6009f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-pet",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/adoptionSystem/v1/pet/deletePet/67cf7fe32c5d0bdb4b6d04d3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"adoptionSystem",
+						"v1",
+						"pet",
+						"deletePet",
+						"67cf7fe32c5d0bdb4b6d04d3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-pet",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/adoptionSystem/v1/pet/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"adoptionSystem",
+						"v1",
+						"pet",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-password",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2NmN2JmY2Q0N2VkYWQxNDlhNjAwOWIiLCJpYXQiOjE3NDE2NTA5NTEsImV4cCI6MTc0MTY1NDU1MX0.zgUB5jeTtQGa24KZWI3GE6L7ibd3p1I4WPylkNIQ1YM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"currentPassword\": \"12365487\",\r\n    \"newPassword\": \"87654321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/adoptionSystem/v1/users/update-password/67cf8c2975ad2a67257c9436",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"adoptionSystem",
+						"v1",
+						"users",
+						"update-password",
+						"67cf8c2975ad2a67257c9436"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
