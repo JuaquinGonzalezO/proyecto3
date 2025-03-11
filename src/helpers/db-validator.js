@@ -1,5 +1,8 @@
-import Role from '../role/role.model.js';
 import User from '../users/user.model.js';
+import Role from '../role/role.model.js';
+import Pet from  '../pet/pet.model.js'
+import Appointment from "../appointment/add_appointment.model.js"
+
 
 export const esRoleValido = async (role = '') => {
 
@@ -26,3 +29,18 @@ export const existeUsuarioById = async (id = "") => {
         throw new Error(`El ID ${id} no existe b`)
     }
 }
+
+export const petExists = async (id = "") => {
+    const existe = await Pet.findById(id);
+    if (!existe) {
+        throw new Error("No existe la mascota con el ID proporcionado");
+    }
+};
+
+export const appointmentExists = async (id = "") => {
+    const existe = await Appointment.findById(id);
+    if (!existe) {
+        throw new Error("No existe una cita con el ID proporcionado");
+    }
+};
+

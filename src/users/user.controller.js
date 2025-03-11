@@ -1,5 +1,5 @@
 import { response, request } from "express";
-import { hash, verify } from "argon2";
+import bcrypt from 'bcryptjs';
 import User from "./user.model.js";
 
 export const getUsers = async(req = request, res = response)=>{
@@ -85,31 +85,73 @@ export const getUserById = async(req, res) => {
     }
   }
 
-export const updatePassword = async(req, res)=>{
-    
-}
 
-
-export const deleteUser = async (req, res)=>{
+  export const updatePassword = async (req, res = response) => {
+    const { id } = req.params;
+    const { password } = req.body; 
     try {
-        const { id } = req.params
-        const user = await User.findByIdAndUpdate(id,{estado: false}, {new:true});
-        
-        const authenticatedUser = req.user
-        res.status(200).json({
-            succes: true,
-            msg: 'Usuario desactivado',
-            user,
-            authenticatedUser
-        })
+      
+        if (!password) {
+            return res.status(400).json({
+                success: false,
+                msg: 'La nueva contraseña es obligatoria'
+            });
+        }
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                msg: 'Usuario no encontrado'
+            });
+        }
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
+        user.password = hashedPassword;
+        await user.save();
 
+        return res.status(200).json({
+            success: true,
+            msg: 'Contraseña actualizada con éxito',
+            user: {
+                uid: user._id,
+                name: user.name,
+                surname: user.surname,
+                username: user.username
+            }
+        });
+    } catch (error) {
+        console.error('Error al actualizar la contraseña:', error);  
+        return res.status(500).json({
+            success: false,
+            msg: 'Error interno al actualizar la contraseña',
+            error: error.message || error 
+        });
+    }
+};
 
-        } catch (error) {
-            res.status(500).json({
-                succes:false,
-                msg:'Error al obtener usuarios',
-                error  
-                })
-}
-}
+  export const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params; 
+        const user = await User.findByIdAndDelete(id);
+
+        if (!user) {
+            return res.status(404).json({ 
+                success: false, 
+                message: "Usuario no encontrado" 
+            });
+        }
+        res.status(200).json({ 
+            success: true, 
+            message: "Usuario eliminado exitosamente",
+            deletedUser: user 
+        });
+    } catch (error) {
+     
+        res.status(500).json({
+            success: false,
+            message: "Error al eliminar el usuario",
+            error: error.message 
+        });
+    }
+};

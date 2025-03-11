@@ -1,41 +1,17 @@
 import { Router } from "express";
-import { check } from "express-validator";
-import { savePet, getPets, searchPet, deletePet } from "./pet.controller.js";
-import { validarCampos } from "../middlewares/validar-campos.js";
-import { validarJWT } from '../middlewares/validar-jwt.js';
+import { savePet, getPets, searchPet, deletePet, updatePet } from "./pet.controller.js";
+import { createPetValidator, getPetByIdValidator, updatePetValidator, deletePetValidator } from "../middlewares/pet-validator.js";
 
 const router = Router();
 
-router.post(
-    "/",
-    [
-        validarJWT,
-        check('email', 'Este no es un correo valido').not().isEmpty(),
-        validarCampos
-    ],
-    savePet
-)
+router.post("/addPet", createPetValidator, savePet);
 
-router.get("/", getPets)
+router.get("/findPet/:id", getPetByIdValidator, searchPet);
 
-router.get(
-    "/:id",
-    [
-        validarJWT,
-        check("id", "No es un ID válido").isMongoId(),
-        validarCampos
-    ],
-    searchPet
-)
+router.get("/", getPets);
 
-router.delete(
-    "/:id",
-    [
-        validarJWT,
-        check("id", "No es un ID válido").isMongoId(),
-        validarCampos
-    ],
-    deletePet
-)
+router.put("/updatePet/:id", updatePetValidator, updatePet);
+
+router.delete("/deletePet/:id", deletePetValidator, deletePet);
 
 export default router;
